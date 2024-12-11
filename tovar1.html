@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}
+товар1
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Левая колонка: Картинка товара -->
+        <div class="col-md-6 text-center">
+            <div class="image-container">
+                <img id="product-image" src="{{ url_for('static', filename='img/' + images[0]) }}" alt="Товар" class="img-fluid rounded" style="width: 500px; height: 500px;">
+            </div>
+            <!-- Кнопки для смены изображений -->
+            <div class="mt-4">
+                {% for image in images %}
+                    <button onclick="changeImage('{{ image }}')" class="btn btn-outline-primary me-2">Фото {{ loop.index }}</button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Правая колонка: Название товара, цена и таблица -->
+        <div class="col-md-6">
+            <!-- Название товара -->
+            <h2 class="mt-4">Лонгслив ERD</h2>
+
+            <!-- Цена товара -->
+            <p class="lead mt-2">Цена: $50</p>
+
+            <!-- Таблица с характеристиками -->
+            <table class="table table-bordered mt-4">
+                <tbody>
+                    <tr>
+                        <th>Страна производства</th>
+                        <td>Китай</td>
+                    </tr>
+                    <tr>
+                        <th>Доступные размеры</th>
+                        <td>48-54</td>
+                    </tr>
+                    <tr>
+                        <th>Уход за вещами</th>
+                        <td>Стирка при t не более 30</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Кнопка "Купить" -->
+            <button onclick="buyProduct()" class="btn btn-primary btn-lg mt-3">Купить</button>
+
+            <!-- Форма для добавления комментария -->
+            <div class="mt-5">
+                <h4>Добавить отзыв</h4>
+                <form action="{{ url_for('add_comment') }}" method="POST">
+                    <input type="hidden" name="product_id" value="1">  <!-- Укажите ID товара -->
+                    <input type="hidden" name="next" value="{{ request.url }}">  <!-- Передаем текущий URL -->
+                    <div class="mb-3">
+                        <textarea name="comment" class="form-control" rows="3" placeholder="Введите ваш комментарий"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+
+            <!-- Форма для добавления оценки -->
+            <div class="mt-5">
+                <h4>Оцените товар</h4>
+                <form action="{{ url_for('add_rating') }}" method="POST">
+                    <input type="hidden" name="product_id" value="1">  <!-- Укажите ID товара -->
+                    <input type="hidden" name="next" value="{{ request.url }}">  <!-- Передаем текущий URL -->
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Оценка (от 1 до 5)</label>
+                        <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Оценить</button>
+                </form>
+            </div>
+
+            <!-- Отображение комментариев -->
+            <div class="mt-5">
+                <h4>ОТЗЫВЫ</h4>
+                <ul class="list-group">
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <strong>{{ comment.user.username }}</strong> ({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}):
+                            <br>
+                            {{ comment.text }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Отображение среднего рейтинга -->
+            <div class="mt-5">
+                <h4>Средний рейтинг</h4>
+                <p>{{ average_rating|round(1) }} из 5</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeImage(imageName) {
+        // Получаем элемент изображения
+        const imageElement = document.getElementById('product-image');
+        // Меняем src изображения
+        imageElement.src = "{{ url_for('static', filename='img/') }}" + imageName;
+    }
+
+    function buyProduct() {
+        {% if current_user.is_authenticated %}
+            // Если пользователь авторизован, перенаправляем на страницу /buy
+            window.location.href = "{{ url_for('buy') }}";
+        {% else %}
+            // Если пользователь не авторизован, показываем всплывающее окно
+            alert("Для покупки необходимо авторизоваться!");
+        {% endif %}
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+/* LOGO */
+header {
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    z-index: 1000;
+    background: #fff;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.header__img {
+    height: 64px;
+    width: 64px;
+}
+
+body {
+    margin: 0;
+        background: #e6e8eb;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+header, footer {
+    padding: 400px;
+    background: #00001;
+}
+
+.page {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    max-width: 100vh;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex: 1 1 auto;
+}
+
+footer {
+    max-height: 100px;
+    overflow: auto;
+    background: #fff;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}

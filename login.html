@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+{% block content%}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Вход</title>
+    </head>
+    <body>
+        <h1>Вход</h1>
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.username.label }} {{ form.username(size=20) }}
+            </div>
+            <div>
+                {{ form.password.label }} {{ form.password(size=20) }}
+            </div>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+    </body>
+    </html>
+{% endblock %}

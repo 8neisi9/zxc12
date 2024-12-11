@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+КАТАЛОГ
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">КАТАЛОГ</h1>
+<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    <!-- Карточка 1 -->
+    <div class="col-lg-4">
+        <a href="/tovar1.html" class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/img/tovar1.1.png'); background-size: cover; background-position: center; display: block;">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-5 display-6 lh-1 fw-bold"></h3>
+            </div>
+        </a>
+        <!-- Новый текст под фото -->
+        <div class="text-center mt-3">
+           <h3 class="display-6 lh-1 fw-bold" style="font-size: 1.2em;">Лонгслив ERD</h3>
+        </div>
+    </div>
+
+    <!-- Карточка 2 -->
+    <div class="col-lg-4">
+        <a href="/tovar2.html" class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/img/tovar2.1.png'); background-size: cover; background-position: center; display: block;">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-5 display-6 lh-1 fw-bold"></h3>
+            </div>
+        </a>
+        <!-- Новый текст под фото -->
+        <div class="text-center mt-3">
+           <h3 class="display-6 lh-1 fw-bold" style="font-size: 1.2em;">Худи Grailz project</h3>
+        </div>
+    </div>
+
+    <!-- Карточка 3 -->
+    <div class="col-lg-4">
+        <a href="/tovar3.html" class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('static/img/tovar3.1.png'); background-size: cover; background-position: center; display: block;">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-5 display-6 lh-1 fw-bold"></h3>
+            </div>
+        </a>
+        <!-- Новый текст под фото -->
+        <div class="text-center mt-3">
+           <h3 class="display-6 lh-1 fw-bold" style="font-size: 1.2em;">Зип-худи VETEMENTS</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+заказ
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <!-- Левая колонка: Карта Google -->
+        <div class="col-md-6">
+            <h2 class="mb-4">Наш адрес</h2>
+            <div id="map" style="width: 250px; height: 250px; margin-bottom: 20px;"></div> <!-- Устанавливаем размеры 300x300 и отступ снизу -->
+        </div>
+
+        <!-- Правая колонка: Форма для ввода адреса доставки -->
+        <div class="col-md-6">
+            <h2 class="mb-4">Адрес доставки</h2>
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">ФИО</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Адрес доставки</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="zip_code" class="form-label">Индекс</label>
+                    <input type="text" class="form-control" id="zip_code" name="zip_code" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Перейти к оплате</button>
+            </form>
+        </div>
+    </div>
+
+
+<!-- Подключение Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvT2KwN3xG8yrlflh5qOKFkeDLgwl-q0Y"></script>
+<script>
+    function initMap() {
+        // Координаты вашего адреса
+        const location = { lat: 55.7558, lng: 37.6173 }; // Пример: Москва
+
+        // Создаем карту
+        const map = new google.maps.Map(document.getElementById('map'), {
+            center: location,
+            zoom: 14
+        });
+
+        // Добавляем маркер на карту
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: 'Наш адрес'
+        });
+    }
+    // Инициализация карты
+    window.onload = initMap;
+</script>
+{% endblock %}
